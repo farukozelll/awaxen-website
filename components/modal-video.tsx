@@ -56,7 +56,7 @@ export default function ModalVideo({
       >
         <figure className="relative overflow-hidden rounded-2xl h-[575px] bg-cover before:absolute before:inset-0 before:-z-10 before:bg-gradient-to-br before:from-gray-900 before:via-indigo-500/20 before:to-gray-900">
           <Image
-            className="h-full object-contain object-contain opacity-50"
+            className="h-full object-contain opacity-50"
             src={thumb}
             width={thumbWidth}
             height={thumbHeight}
