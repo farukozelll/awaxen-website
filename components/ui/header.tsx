@@ -1,41 +1,133 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import logo from "@/public/images/logo-beyaz.png";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import logo from '@/public/images/logo-beyaz.png';
+import { cn } from '@/utils/utils';
+
+const NAV_ITEMS = [
+  { label: 'Çözümler', href: '/products' },
+  { label: 'Özellikler', href: '/features' },
+  { label: 'Hakkımızda', href: '/about' },
+  { label: 'İletişim', href: '/contact' }
+];
+
+const STYLES = {
+  header: {
+    wrapper: cn(
+      'fixed top-0 left-0 right-0 z-50',
+      'transition-all duration-300'
+    ),
+    container: cn(
+      'mx-auto max-w-7xl',
+      'px-4 sm:px-6 lg:px-8',
+      'py-4'
+    ),
+    nav: cn(
+      'relative flex items-center justify-between',
+      'rounded-full',
+      'bg-black/50 backdrop-blur-lg',
+      'border border-white/10',
+      'px-4 py-3 sm:px-6',
+      'transition-all duration-300'
+    )
+  },
+  logo: {
+    wrapper: cn(
+      'flex items-center',
+      'mr-8'
+    ),
+    image: 'w-28 h-auto'
+  },
+  menu: {
+    wrapper: cn(
+      'hidden md:flex items-center space-x-1',
+      'mr-auto'
+    ),
+    link: cn(
+      'px-4 py-2 rounded-full',
+      'text-sm font-medium text-white/70',
+      'hover:text-white hover:bg-white/10',
+      'transition-all duration-200'
+    )
+  },
+  auth: {
+    wrapper: 'flex items-center space-x-3',
+    signin: cn(
+      'px-4 py-2 rounded-full',
+      'text-sm font-medium text-white/70',
+      'hover:text-white hover:bg-white/10',
+      'transition-all duration-200'
+    ),
+    signup: cn(
+      'px-4 py-2 rounded-full',
+      'text-sm font-medium text-white',
+      'bg-blue-500 hover:bg-blue-600',
+      'transition-all duration-200',
+      'shadow-lg shadow-blue-500/25'
+    )
+  }
+};
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="z-30 mt-2 w-full md:mt-5">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-gray-900/90 px-3 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_right,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] after:absolute after:inset-0 after:-z-10 after:backdrop-blur-sm">
-          {/* Site branding */}
-          <div className="flex flex-1 items-center">
-            <Link href="/" className="inline-flex shrink-0" aria-label="Cruip">
-              <Image src={logo} alt="Cruip Logo" width={112} height={32} />
-            </Link>
+    <header className={STYLES.header.wrapper}>
+      <div className={STYLES.header.container}>
+        <motion.nav 
+          className={cn(
+            STYLES.header.nav,
+            isScrolled && 'py-2 shadow-xl shadow-black/10'
+          )}
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Logo */}
+          <Link href="/" className={STYLES.logo.wrapper}>
+            <Image
+              src={logo}
+              alt="Awaxen Logo"
+              className={STYLES.logo.image}
+              priority
+            />
+          </Link>
+
+          {/* Main Navigation */}
+          <div className={STYLES.menu.wrapper}>
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={STYLES.menu.link}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Desktop sign in links */}
-          <ul className="flex flex-1 items-center justify-end gap-3">
-            <li>
-              <Link
-                href="/signin"
-                className="btn-sm relative bg-gradient-to-b from-gray-800 to-gray-800/60 bg-[length:100%_100%] bg-[bottom] py-[5px] text-gray-300 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_right,theme(colors.gray.800),theme(colors.gray.700),theme(colors.gray.800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-[length:100%_150%]"
-              >
-                Giriş Yap
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/signup"
-                className="btn-sm bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] py-[5px] text-white shadow-[inset_0px_1px_0px_0px_theme(colors.white/.16)] hover:bg-[length:100%_150%]"
-              >
-                Kayıt Ol
-              </Link>
-            </li>
-          </ul>
-        </div>
+          {/* Auth Buttons */}
+          <div className={STYLES.auth.wrapper}>
+            <Link href="/signin" className={STYLES.auth.signin}>
+              Giriş Yap
+            </Link>
+            <Link href="/signup" className={STYLES.auth.signup}>
+              Kayıt Ol
+            </Link>
+          </div>
+        </motion.nav>
       </div>
     </header>
   );
