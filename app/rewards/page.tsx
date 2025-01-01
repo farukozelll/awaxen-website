@@ -292,7 +292,6 @@ export default function GalleryPage() {
           </motion.div>
         )}
       </AnimatePresence>
-      <Footer />
     </main>
   );
 }

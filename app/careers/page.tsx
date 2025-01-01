@@ -338,7 +338,7 @@ export default function CareersPage() {
             </button>
           </motion.div>
         </motion.div>
-      )}       <Footer />
+      )}      
 
     </main>
   );

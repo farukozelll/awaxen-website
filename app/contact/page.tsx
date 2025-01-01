@@ -264,7 +264,7 @@ export default function ContactPage() {
             </div>
           </motion.div>
         </div>
-      </div>      <Footer />
+      </div>     
 
     </main>
   );

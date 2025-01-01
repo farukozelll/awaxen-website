@@ -206,7 +206,6 @@ export default function FAQPage() {
           />
         ))}
       </div>
-      <Footer />
     </main>
   );
 }

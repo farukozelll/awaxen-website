@@ -286,7 +286,6 @@ export default function PartnersPage() {
           </button>
         </div>
       </div>
-      <Footer />
     </main>
   );
 }
