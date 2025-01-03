@@ -5,6 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils/utils';
+import AnimatedWLiquidWave from '@/components/AnimatedWLiquidWave';
 
 const STYLES = {
   main: cn(
@@ -31,18 +32,18 @@ export default function DefaultLayout({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // AOS Konfigürasyonu
+    // AOS Configuration
     AOS.init({
       once: true,
-      disable: window.innerWidth < 768, // Mobilde devre dışı
+      disable: window.innerWidth < 768,
       duration: 750,
       easing: 'ease-out-cubic',
       delay: 0,
       offset: 50
     });
 
-    // Sayfa yüklendiğinde loader'ı kaldır
-    setTimeout(() => setIsLoading(false), 1000);
+    // Remove loader after page load
+    setTimeout(() => setIsLoading(false), 2500);
 
     // Resize event listener
     const handleResize = () => {
@@ -63,11 +64,12 @@ export default function DefaultLayout({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {/* Loader animasyonu */}
+            {/* W Logo with liquid animation */}
             <motion.div
+              className="w-48 h-48 flex items-center justify-center"
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [1, 0.8, 1]
+                scale: [1, 1.05, 1],
+                opacity: [1, 0.9, 1]
               }}
               transition={{
                 duration: 2,
@@ -75,8 +77,12 @@ export default function DefaultLayout({
                 ease: 'easeInOut'
               }}
             >
-              {/* Logo veya loader icon */}
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+              <AnimatedWLiquidWave
+                waveColor="#4ADE80"
+                baseColor="#0A0F1E"
+                width={200}
+                height={141}
+              />
             </motion.div>
           </motion.div>
         )}
@@ -86,7 +92,7 @@ export default function DefaultLayout({
         <motion.div
           className={STYLES.content}
           initial={{ opacity: 0 }}
-          animate={{ 
+          animate={{
             opacity: isLoading ? 0 : 1,
             filter: isLoading ? 'blur(10px)' : 'blur(0px)'
           }}
