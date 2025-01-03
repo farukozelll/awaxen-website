@@ -78,10 +78,11 @@ export default function DefaultLayout({
               }}
             >
               <AnimatedWLiquidWave
-                waveColor="#4ADE80"
-                baseColor="#0A0F1E"
-                width={200}
-                height={141}
+                 leafColor="#4ADE80"
+                 circuitColor="#60A5FA"
+                 baseColor="#0A0F1E"
+                 width={280}
+                 height={280}
               />
             </motion.div>
           </motion.div>
