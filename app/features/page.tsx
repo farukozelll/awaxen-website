@@ -5,6 +5,8 @@ import { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/utils/utils';
+import ParallaxCard from '@/components/ParallaxCard';
+
 
 const FEATURES = [
   {
@@ -161,142 +163,7 @@ const CheckIcon = () => (
   </svg>
 );
 
-// ParallaxCard Component
-function ParallaxCard({ feature, index }: { feature: any; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [hovering, setHovering] = useState(false);
 
-  // Mouse position values
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth spring animation
-  const springConfig = { damping: 15, stiffness: 150 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), springConfig);
-  const scale = useSpring(hovering ? 1.05 : 1, springConfig);
-
-  // Parallax movement for content
-  const moveX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-20, 20]), springConfig);
-  const moveY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-20, 20]), springConfig);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseXValue = (e.clientX - rect.left) / width - 0.5;
-    const mouseYValue = (e.clientY - rect.top) / height - 0.5;
-
-    mouseX.set(mouseXValue);
-    mouseY.set(mouseYValue);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className="relative perspective-1000"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => {
-        setHovering(false);
-        mouseX.set(0);
-        mouseY.set(0);
-      }}
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.2 }}
-    >
-      <motion.div
-        className={STYLES.features.card.wrapper}
-        style={{
-          rotateX,
-          rotateY,
-          scale,
-          transformStyle: 'preserve-3d'
-        }}
-      >
-        {/* Tag */}
-        <motion.span
-          className={STYLES.features.card.tag}
-          style={{ z: 20, translateZ: 50 }}
-        >
-          {feature.tag}
-        </motion.span>
-
-        {/* Icon */}
-        <motion.div
-          style={{ x: moveX, y: moveY, z: 40 }}
-          className="relative z-20"
-        >
-          <Image
-            src={feature.icon}
-            alt=""
-            width={48}
-            height={48}
-            className={STYLES.features.card.icon}
-          />
-        </motion.div>
-
-        {/* Title & Description */}
-        <motion.div
-          style={{ x: moveX, y: moveY, z: 30 }}
-          className="relative z-20"
-        >
-          <h3 className={STYLES.features.card.title}>
-            {feature.title}
-          </h3>
-          <p className={STYLES.features.card.description}>
-            {feature.description}
-          </p>
-        </motion.div>
-
-        {/* Image */}
-        <div className={STYLES.features.card.image}>
-          <motion.div
-            style={{ x: moveX, y: moveY, scale: hovering ? 1.1 : 1 }}
-            className="relative w-full h-full overflow-hidden"
-          >
-            <Image
-              src={feature.image}
-              alt={feature.title}
-              fill
-              className="object-cover transition-transform duration-500"
-            />
-          </motion.div>
-        </div>
-
-        {/* Highlights */}
-        <motion.div
-          style={{ x: moveX, y: moveY, z: 20 }}
-          className={STYLES.features.card.highlights.wrapper}
-        >
-          {feature.highlights.map((highlight: string, i: number) => (
-            <motion.div
-              key={i}
-              className={STYLES.features.card.highlights.item}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.2 + i * 0.1 }}
-            >
-              <CheckIcon />
-              <span>{highlight}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Gradient Overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"
-          style={{
-            opacity: useTransform(mouseY, [-0.5, 0.5], [0.6, 0.3])
-          }}
-        />
-      </motion.div>
-    </motion.div>
-  );
-}
 
 // Ana komponent içinde kullanımı
 export default function FeaturesPage() {
