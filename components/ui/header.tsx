@@ -27,9 +27,8 @@ const STYLES = {
     ),
     nav: cn(
       'relative flex items-center justify-between',
-      'rounded-full',
-      'bg-black/50 backdrop-blur-lg',
-      'border border-white/10',
+      'h-20 rounded-lg',
+      'bg-black/30 backdrop-blur-lg',
       'px-4 py-3 sm:px-6',
       'transition-all duration-300'
     )
@@ -47,7 +46,7 @@ const STYLES = {
       'mr-auto'
     ),
     link: cn(
-      'px-4 py-2 rounded-full',
+      'px-4 py-2 rounded-lg',
       'text-sm font-medium text-white/70',
       'hover:text-white hover:bg-white/10',
       'transition-all duration-200'
@@ -56,13 +55,13 @@ const STYLES = {
   auth: {
     wrapper: 'flex items-center space-x-3',
     signin: cn(
-      'px-4 py-2 rounded-full',
+      'px-4 py-2 rounded-lg',
       'text-sm font-medium text-white/70',
       'hover:text-white hover:bg-white/10',
       'transition-all duration-200'
     ),
     signup: cn(
-      'px-4 py-2 rounded-full',
+      'px-4 py-2 rounded-lg',
       'text-sm font-medium text-white',
       'bg-blue-500 hover:bg-blue-600',
       'transition-all duration-200',
