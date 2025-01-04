@@ -64,7 +64,7 @@ const ParallaxCard: React.FC<ParallaxCardProps> = ({ feature, index }) => {
   const springConfig = {
     stiffness: 150,
     damping: 20,
-    mass: 0.2
+    mass: 5
   };
 
   // Card rotations with easing

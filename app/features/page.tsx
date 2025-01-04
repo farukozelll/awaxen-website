@@ -53,7 +53,7 @@ const FEATURES = [
 const STYLES = {
   container: cn(
     'min-h-screen bg-[#0A0F1E]',
-    'pb-16 sm:pb-20 lg:pb-24'
+    'pb-16 pt-36 sm:pb-20 lg:pb-24'
   ),
   header: {
     wrapper: cn(

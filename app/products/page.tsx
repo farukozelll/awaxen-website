@@ -6,6 +6,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/utils/utils';
 import Footer from "@/components/ui/footer";
+import solar from '@/public/images/solar.png';
+import agribot from '@/public/images/agribot.jpg';
+import aiAnalysis from '@/public/images/ai-analysis.webp';
 
 const PRODUCTS = [
   {
@@ -25,8 +28,8 @@ const PRODUCTS = [
       'Veri Güncelleme': 'Real-time',
       'Enerji Tasarrufu': 'Ortalama %40'
     },
-    image: '/images/products/solar-system.jpg',
-    techImage: '/images/products/solar-tech.jpg'
+    image: solar,
+    techImage: solar
   },
   {
     id: 'agribot',
@@ -45,8 +48,8 @@ const PRODUCTS = [
       'Alan Kapasitesi': '5 dönüm/gün',
       'Şarj Süresi': '2 saat'
     },
-    image: '/images/products/agribot.jpg',
-    techImage: '/images/products/agribot-tech.jpg'
+    image: agribot,
+    techImage: agribot
   },
   {
     id: 'ai',
@@ -65,8 +68,8 @@ const PRODUCTS = [
       'Desteklenen Bitki': '10+ tür',
       'Güncelleme Sıklığı': 'Haftalık'
     },
-    image: '/images/products/ai-system.jpg',
-    techImage: '/images/products/ai-tech.jpg'
+    image: aiAnalysis,
+    techImage: aiAnalysis
   }
 ];
 
@@ -82,7 +85,7 @@ const STYLES = {
       'container mx-auto px-4 sm:px-6 lg:px-8',
       'text-center max-w-4xl'
     ),
-    background: 'absolute inset-0 opacity-10 bg-[url("/images/grid.svg")]'
+    background: 'absolute inset-0 opacity-10 bg-[url("/images/grid.png")]'
   },
   products: {
     wrapper: 'container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl -mt-16',
@@ -169,8 +172,9 @@ export default function ProductsPage() {
                   src={product.image}
                   alt={product.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover grayscale-[50%] transition-transform duration-500 group-hover:scale-105"
                 />
+                <div className="object-cover absolute inset-0 bg-indigo-400 bg-opacity-20 transition-transform duration-500 group-hover:scale-105"></div>
               </div>
               <div className={STYLES.productCard.content}>
                 <h3 className={STYLES.productCard.title}>{product.title}</h3>
