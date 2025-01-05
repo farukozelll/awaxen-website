@@ -29,22 +29,6 @@ export default function BlogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9;
 
-/*   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setIsLoading(true);
-        // Gerçek uygulamada API çağrısı yapılacak
-        setPosts(POSTS);
-      } catch (err) {
-        setError('Failed to fetch posts');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []); */
-
   const filteredPosts = posts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
@@ -72,7 +56,7 @@ export default function BlogPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+    <div className="min-h-screen bg-gray-900 dark:bg-gray-900 transition-colors duration-200">
       {/* Hero Section */}
       <motion.section 
         className="relative bg-gradient-to-r from-gray-900 to-gray-800 pt-32 pb-20"
