@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/utils/utils';
 import Footer from "@/components/ui/footer";
+import Spotlight from "@/components/spotlight";
 
 const JOURNEY_STEPS = [
   {
@@ -34,19 +35,19 @@ const TEAM_MEMBERS = [
   {
     name: 'Takım Üyesi 1',
     role: 'Kurucu & CEO',
-    image: '/images/team/member1.jpg',
+    image: '/images/avatar.svg',
     expertise: 'Robotik ve Otomasyon'
   },
   {
     name: 'Takım Üyesi 2',
     role: 'CTO',
-    image: '/images/team/member2.jpg',
+    image: '/images/avatar.svg',
     expertise: 'Solar Sistemler'
   },
   {
     name: 'Takım Üyesi 3',
     role: 'AI Direktörü',
-    image: '/images/team/member3.jpg',
+    image: '/images/avatar.svg',
     expertise: 'Yapay Zeka ve ML'
   },
 ];
@@ -55,12 +56,18 @@ const STYLES = {
   container: 'min-h-screen bg-[#0A0F1E]',
   header: {
     section: cn(
-      'relative pt-24 pb-32',
+      'relative pt-40 pb-32',
       'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]',
       'overflow-hidden'
     ),
     content: 'container mx-auto px-4 text-center max-w-4xl relative z-10',
-    background: 'absolute inset-0 opacity-10 bg-[url("/images/grid.svg")]',
+    background: cn(
+      'absolute mt-20 bg-cover inset-0 opacity-10',
+      'bg-[url("/images/bg.svg")]',
+      'w-full h-64 object-cover',
+      '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
+      '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
+    ),
     overlay: 'absolute inset-0 bg-gradient-to-b from-transparent to-[#0A0F1E]'
   },
   sections: {
@@ -120,16 +127,16 @@ export default function AboutPage() {
       <section className={STYLES.header.section}>
         <div className={STYLES.header.background} />
         <div className={STYLES.header.overlay} />
-        
+
         <div className={STYLES.header.content}>
-          <motion.h1 
+          <motion.h1
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             Geleceği Bugünden Uyandırıyoruz
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-xl text-white/80"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -144,7 +151,28 @@ export default function AboutPage() {
       <div className={STYLES.sections.wrapper}>
         {/* Origin Story Section */}
         <section className={STYLES.sections.grid}>
-          <motion.div 
+          <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none">
+            <a
+              className="group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 after:hover:opacity-20 before:group-hover:opacity-100"
+            >
+              <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-gradient-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
+                <div className="p-6">
+                  <div className="mb-3">
+                    <span className="text-2xl font-bold text-white mb-4">
+                      <span className="bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
+                        Neden Awaxen?
+                      </span>
+                    </span>
+                  </div>
+                  <p className="text-white">
+                    Güneş enerjisi santrallerinde yapay zeka destekli otonom termografik muayene ve elektrolüminesans görüntüleme gerçekleştirin.
+                    IEC 62446 standartlarına uyumlu olarak raporlar oluşturun
+                  </p>
+                </div>
+              </div>
+            </a>
+          </Spotlight>
+          {/* <motion.div 
             className={STYLES.story.card}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -157,7 +185,7 @@ export default function AboutPage() {
               ortadan kaldırarak başladığımız yolculuğumuz, bugün güneş panellerinin otomatik bakımı ve
               hastalık tespiti gibi yenilikçi çözümlerle devam ediyor.
             </p>
-          </motion.div>
+          </motion.div> */}
 
           <motion.div
             className="relative aspect-[4/3] rounded-2xl overflow-hidden"
@@ -166,10 +194,14 @@ export default function AboutPage() {
             viewport={{ once: true }}
           >
             <Image
-              src="/images/about/awakening.jpg"
+              src="/images/smart-thermostat.png"
               alt="Awaxen Story"
               fill
               className="object-cover"
+              style={{
+                maskImage: "radial-gradient(circle, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%)",
+                WebkitMaskImage: "radial-gradient(circle, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%)",
+              }}
             />
           </motion.div>
         </section>
@@ -179,7 +211,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-bold text-white text-center mb-12">Yolculuğumuz</h2>
           <div className="max-w-2xl mx-auto">
             {JOURNEY_STEPS.map((step, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 className={STYLES.journey.step}
                 initial={{ opacity: 0, x: -20 }}
@@ -199,17 +231,26 @@ export default function AboutPage() {
         {/* Stats Section */}
         <section className={STYLES.stats.grid}>
           {STATS.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              className={STYLES.stats.card}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              <Spotlight className="group w-full mx-auto grid max-w-sm items-start gap-6 lg:max-w-none text-center">
+            <a
+              className="group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 after:hover:opacity-20 before:group-hover:opacity-100"
             >
-              <div className="text-3xl font-bold text-blue-400 mb-2">{stat.value}</div>
-              <div className="text-sm text-white/70">{stat.label}</div>
-            </motion.div>
+              <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-gradient-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
+                <div className="p-6">
+                  <div className="mb-3">
+                    <span className="text-2xl font-bold text-white mb-4">
+                      <span className="bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
+                        {stat.value}
+                      </span>
+                    </span>
+                  </div>
+                  <p className="text-white">
+                    {stat.label}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </Spotlight>
           ))}
         </section>
 
@@ -234,7 +275,7 @@ export default function AboutPage() {
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="p-6 text-center">
@@ -247,7 +288,7 @@ export default function AboutPage() {
           </div>
         </section>
       </div>
- 
+
     </main>
   );
 }
