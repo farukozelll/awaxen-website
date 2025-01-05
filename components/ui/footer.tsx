@@ -22,18 +22,17 @@ const FOOTER_DATA = [
     title: 'Şirket',
     links: [
       { label: 'Hakkımızda', href: '/about' },
-      { label: 'Kariyer', href: '/careers' },
-      { label: 'İş Ortakları', href: '/stories' },
+
       { label: 'Fiyatlandırma', href: '/pricing' },
       { label: 'Basın Haber', href: '/press' },
-      { label: 'İletişim', href: '/contact' }
     ]
   },
   {
     title: 'İletişim & Destek',
     links: [
       { label: 'İletişim', href: '/contact' },
-      { label: 'Destek Merkezi', href: '/support' },
+      { label: 'Kariyer', href: '/careers' },
+      { label: 'İş Ortakları', href: '/stories' },
       { label: 'SSS', href: '/faq' },
     ]
   }
