@@ -37,10 +37,10 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
           <div className="p-8 lg:p-12 flex flex-col justify-center">
             {/* Category and Source */}
             <div className="flex items-center gap-3 mb-6">
-              <span className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-800 dark:text-blue-200">
+              <span className="inline-flex items-center rounded-full bg-blue-900 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-800 dark:text-blue-200">
                 Featured
               </span>
-              <span className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-800 dark:text-blue-200">
+              <span className="inline-flex items-center rounded-full bg-blue-900 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-800 dark:text-blue-200">
                 {post.category}
               </span>
               {post.source === 'medium' && (
@@ -52,7 +52,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
             </div>
 
             {/* Title and Subtitle */}
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors mb-4">
+            <h2 className="text-2xl lg:text-3xl font-bold text-blue-500  dark:text-white group-hover:text-blue-500 transition-colors mb-4">
               {post.title}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-8 line-clamp-3">
