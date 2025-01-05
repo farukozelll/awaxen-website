@@ -114,7 +114,7 @@ export default function Testimonials() {
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
       <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,theme(colors.slate.400/.25),transparent)1] md:py-20">
         {/* Section header */}
-        <div className="mx-auto max-w-3xl pb-12 text-center">
+        {/*      <div className="mx-auto max-w-3xl pb-12 text-center">
           <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
             Don't take our word for it
           </h2>
@@ -123,7 +123,7 @@ export default function Testimonials() {
             build healthier and happier workspaces from anywhere in the world.
           </p>
         </div>
-
+ */}
         <div>
           {/* Buttons */}
           <div className="flex justify-center pb-12 max-md:hidden md:pb-16">

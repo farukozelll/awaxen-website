@@ -3,24 +3,16 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/utils';
-import Footer from "@/components/ui/footer";
 
 const CONTACT_INFO = {
   locations: [
     {
-      city: 'İzmir',
-      type: 'AR-GE Merkezi',
-      address: 'Teknopark, No: 123, 35430 İzmir',
-      phone: '+90 232 123 45 67',
-      email: 'izmir@awaxen.com'
+      city: 'İngiltere',
+      type: 'Genel Merkez',
+      address: 'Covert Gardens, No: 123, London',
+      phone: '+90 212 123 45 67',
+      email: 'england@awaxen.com'
     },
-    {
-      city: 'Antalya',
-      type: 'Operasyon Merkezi',
-      address: 'Tarım Teknoloji Vadisi, No: 456, 07100 Antalya',
-      phone: '+90 242 123 45 67',
-      email: 'antalya@awaxen.com'
-    }
   ],
   social: {
     linkedin: 'https://linkedin.com/company/awaxen',
@@ -57,7 +49,7 @@ const STYLES = {
   },
   content: {
     wrapper: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8',
+      'container mx-auto px-4 sm:px-6 lg:px-8 pt-32',
       'max-w-7xl -mt-16'
     ),
     grid: 'grid grid-cols-1 lg:grid-cols-2 gap-12'
@@ -245,7 +237,7 @@ export default function ContactPage() {
             ))}
 
             {/* Social Links */}
-            <div className={STYLES.social.wrapper}>
+{/*             <div className={STYLES.social.wrapper}>
               {Object.entries(CONTACT_INFO.social).map(([platform, url]) => (
                 <a
                   key={platform}
@@ -261,7 +253,7 @@ export default function ContactPage() {
                   />
                 </a>
               ))}
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </div>     
