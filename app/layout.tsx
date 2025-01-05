@@ -55,9 +55,9 @@ export default function RootLayout({
         style={{ backgroundImage: "url('/images/bg.svg')"}}
       >
         <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
-          <Header />
+        
           {children}
-          <Footer />
+       
         </div>
       </body>
     </html>

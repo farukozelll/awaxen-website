@@ -6,7 +6,8 @@ import 'aos/dist/aos.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils/utils';
 import AnimatedWLiquidWave from '@/components/AnimatedWLiquidWave';
-
+import Header from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
 const STYLES = {
   main: cn(
     'relative flex grow flex-col',
@@ -78,11 +79,11 @@ export default function DefaultLayout({
               }}
             >
               <AnimatedWLiquidWave
-                 leafColor="#4ADE80"
-                 circuitColor="#60A5FA"
-                 baseColor="#0A0F1E"
-                 width={280}
-                 height={280}
+                // leafColor="#4ADE80"
+                // circuitColor="#60A5FA"
+               //  baseColor="#0A0F1E"
+               //  width={280}
+               //  height={280}
               />
             </motion.div>
           </motion.div>
@@ -99,7 +100,9 @@ export default function DefaultLayout({
           }}
           transition={{ duration: 0.5 }}
         >
+            <Header />
           {children}
+          <Footer />
         </motion.div>
       </main>
     </>
