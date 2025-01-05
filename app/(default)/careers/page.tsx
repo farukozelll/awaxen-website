@@ -181,14 +181,14 @@ export default function CareersPage() {
       <section className={STYLES.header.wrapper}>
         <div className={STYLES.header.background} />
         <div className={STYLES.header.content}>
-          <motion.h1 
+          <motion.h1
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             Geleceği Birlikte İnşa Edelim
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-xl text-white/80"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -202,7 +202,7 @@ export default function CareersPage() {
       <div className={STYLES.sections.wrapper}>
         {/* Benefits Section */}
         <section className="mb-24">
-          <h2 className={STYLES.sections.title}>Ayrıcalıklar</h2>
+          {/*        <h2 className={STYLES.sections.title}>Ayrıcalıklar</h2>
           <div className={STYLES.benefits.grid}>
             {BENEFITS.map((benefit, index) => (
               <motion.div
@@ -228,7 +228,7 @@ export default function CareersPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
+          </div> */}
         </section>
 
         {/* Jobs Section */}
@@ -302,25 +302,25 @@ export default function CareersPage() {
             >
               ✕
             </button>
-            
+
             <h3 className="text-2xl font-bold text-white mb-4">
               {selectedJob.title}
             </h3>
-            
+
             <div className={STYLES.jobs.card.tags}>
               <span className={STYLES.jobs.card.tag}>{selectedJob.location}</span>
               <span className={STYLES.jobs.card.tag}>{selectedJob.type}</span>
               <span className={STYLES.jobs.card.tag}>{selectedJob.experience}</span>
             </div>
-            
+
             <p className="text-white/70 mt-4 mb-6">
               {selectedJob.description}
             </p>
-            
+
             <h4 className="text-lg font-semibold text-white mb-3">
               Gereksinimler
             </h4>
-            
+
             <ul className={STYLES.jobs.card.requirements}>
               {selectedJob.requirements.map((req, index) => (
                 <li key={index} className="flex items-center gap-2">
@@ -332,13 +332,13 @@ export default function CareersPage() {
 
             <button
               className="mt-8 w-full px-6 py-3 rounded-lg bg-blue-500 text-white font-medium hover:bg-blue-600 transition-colors"
-              onClick={() => {/* Başvuru formu mantığı */}}
+              onClick={() => {/* Başvuru formu mantığı */ }}
             >
               Başvur
             </button>
           </motion.div>
         </motion.div>
-      )}      
+      )}
 
     </main>
   );

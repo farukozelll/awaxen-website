@@ -6,50 +6,9 @@ import Image from 'next/image';
 import { cn } from '@/utils/utils';
 import Footer from "@/components/ui/footer";
 
-const PARTNER_CATEGORIES = [
-  {
-    id: 'technology',
-    name: 'Teknoloji Ortakları',
-    description: 'Yazılım ve donanım çözümlerinde iş birliği yaptığımız şirketler'
-  },
-  {
-    id: 'agriculture',
-    name: 'Tarım Ortakları',
-    description: 'Tarım teknolojileri alanında birlikte çalıştığımız kurumlar'
-  },
-  {
-    id: 'energy',
-    name: 'Enerji Ortakları',
-    description: 'Solar sistemler konusunda iş birliği yaptığımız firmalar'
-  },
-  {
-    id: 'research',
-    name: 'Araştırma Kurumları',
-    description: 'AR-GE projelerinde iş birliği yaptığımız kurumlar'
-  }
-];
+import Testimonials from "@/components/testimonials"; 
 
-const PARTNERS = [
-  {
-    id: 1,
-    name: 'TechCorp Solutions',
-    category: 'technology',
-    logo: '/images/partners/tech-corp.svg',
-    description: 'Yapay zeka ve görüntü işleme teknolojilerinde stratejik ortağımız',
-    partnership: '2022\'den beri iş ortağımız',
-    projects: ['AI Model Geliştirme', 'Görüntü İşleme Sistemleri']
-  },
-  {
-    id: 2,
-    name: 'AgroTech Innovations',
-    category: 'agriculture',
-    logo: '/images/partners/agro-tech.svg',
-    description: 'Akıllı sera sistemleri konusunda çözüm ortağımız',
-    partnership: '2023\'ten beri iş ortağımız',
-    projects: ['Akıllı Sera Sistemleri', 'IoT Sensör Ağları']
-  },
-  // Diğer partnerlar...
-];
+
 
 const SUCCESS_STORIES = [
   {
@@ -159,82 +118,9 @@ export default function PartnersPage() {
           </motion.p>
         </div>
       </section>
-
-      <div className={STYLES.sections.wrapper}>
-        {/* Partner Categories */}
-        <section>
-          <h2 className={STYLES.sections.title}>İş Birliği Alanlarımız</h2>
-          <div className={STYLES.categories.grid}>
-            {PARTNER_CATEGORIES.map((category, index) => (
-              <motion.div
-                key={category.id}
-                className={STYLES.categories.card}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  {category.name}
-                </h3>
-                <p className="text-white/70">
-                  {category.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* Partners Grid */}
-        <section>
-          <h2 className={STYLES.sections.title}>Çözüm Ortaklarımız</h2>
-          <div className={STYLES.partners.grid}>
-            {PARTNERS.map((partner, index) => (
-              <motion.div
-                key={partner.id}
-                className={STYLES.partners.card.wrapper}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className={STYLES.partners.card.logo}>
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    width={160}
-                    height={80}
-                    className="max-h-16 w-auto"
-                  />
-                </div>
-                <div className={STYLES.partners.card.content}>
-                  <h3 className="text-lg font-semibold text-white">
-                    {partner.name}
-                  </h3>
-                  <p className="text-white/70">
-                    {partner.description}
-                  </p>
-                  <p className="text-sm text-blue-400">
-                    {partner.partnership}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {partner.projects.map(project => (
-                      <span
-                        key={project}
-                        className="px-3 py-1 rounded-full bg-white/10 text-sm text-white/70"
-                      >
-                        {project}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
+ <Testimonials />
         {/* Success Stories */}
-        <section className="mt-24">
+{/*         <section className="mt-24">
           <h2 className={STYLES.sections.title}>Başarı Hikayeleri</h2>
           <div className={STYLES.stories.grid}>
             {SUCCESS_STORIES.map((story, index) => (
@@ -271,7 +157,7 @@ export default function PartnersPage() {
               </motion.div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section */}
         <div className={STYLES.cta.wrapper}>
@@ -285,7 +171,7 @@ export default function PartnersPage() {
             İletişime Geçin
           </button>
         </div>
-      </div>
+   
     </main>
   );
 }
