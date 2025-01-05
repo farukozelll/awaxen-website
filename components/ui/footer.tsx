@@ -10,11 +10,10 @@ const FOOTER_DATA = [
   {
     title: 'Çözümler',
     links: [
-      { label: 'Tüm Ürünler', href: '/products' },
-      { label: 'Projelerimiz', href: '/rewards' },
-      { label: 'Bilgi Bankası', href: '/knowledge' },
+      { label: 'Çözümler', href: '/products' },
+      { label: 'Ürünler', href: '/features' },
+      { label: 'Projeler', href: '/rewards' },
       { label: 'Eğitimler', href: '/tutorials' },
-      { label: 'Özellikler', href: '/features' },
     ]
   },
   {

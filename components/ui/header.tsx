@@ -9,7 +9,7 @@ import { cn } from '@/utils/utils';
 
 const NAV_ITEMS = [
   { label: 'Çözümler', href: '/products' },
-  { label: 'Özellikler', href: '/features' },
+  { label: 'Ürünler', href: '/features' },
   { label: 'Hakkımızda', href: '/about' },
   { label: 'İletişim', href: '/contact' }
 ];
