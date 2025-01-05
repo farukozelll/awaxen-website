@@ -12,7 +12,6 @@ const FOOTER_DATA = [
     links: [
       { label: 'Tüm Ürünler', href: '/products' },
       { label: 'Projelerimiz', href: '/rewards' },
-      { label: 'Blog', href: '/blog' },
       { label: 'Bilgi Bankası', href: '/knowledge' },
       { label: 'Eğitimler', href: '/tutorials' },
       { label: 'Özellikler', href: '/features' },
@@ -22,7 +21,7 @@ const FOOTER_DATA = [
     title: 'Şirket',
     links: [
       { label: 'Hakkımızda', href: '/about' },
-
+      { label: 'Blog', href: '/blog' },
       { label: 'Fiyatlandırma', href: '/pricing' },
       { label: 'Basın Haber', href: '/press' },
     ]
