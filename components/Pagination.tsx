@@ -4,92 +4,71 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { DOTS, usePagination } from '@/hooks/usePagination';
 
 interface PaginationProps {
-  totalItems: number;
-  itemsPerPage: number;
-  currentPage: number;
-  onPageChange: (page: number) => void;
+    totalItems: number;
+    itemsPerPage: number;
+    currentPage: number;
+    onPageChange: (page: number) => void;
+    siblingsCount?: number;
 }
 
+// components/Pagination.tsx
 export function Pagination({
-  totalItems,
-  itemsPerPage,
-  currentPage,
-  onPageChange,
-}: PaginationProps) {
-  const paginationRange = usePagination({
     totalItems,
     itemsPerPage,
     currentPage,
-  });
-
-  if (!paginationRange || currentPage === 0 || paginationRange.length < 2) {
-    return null;
-  }
-
-  const onNext = () => {
-    if (currentPage < Math.ceil(totalItems / itemsPerPage)) {
-      onPageChange(currentPage + 1);
-    }
-  };
-
-  const onPrevious = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
-  };
-
-  return (
-    <div className="flex items-center justify-center gap-2">
-      <button
-        onClick={onPrevious}
-        disabled={currentPage === 1}
-        className={cn(
-          'flex h-10 w-10 items-center justify-center rounded-lg transition-colors',
-          currentPage === 1
-            ? 'cursor-not-allowed text-gray-400 dark:text-gray-600'
-            : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-        )}
-      >
-        <ChevronLeft className="h-5 w-5" />
-      </button>
-
-      {paginationRange.map((pageNumber, i) => {
-        if (pageNumber === DOTS) {
-          return (
-            <span key={`dots-${i}`} className="px-4 py-2">
-              &#8230;
-            </span>
-          );
-        }
-
-        return (
+    onPageChange
+  }: PaginationProps) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+  
+    if (totalPages <= 1) return null;
+  
+    return (
+      <div className="flex items-center justify-center gap-2">
+        {/* Önceki sayfa butonu */}
+        <button
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={cn(
+            'flex h-10 w-10 items-center justify-center rounded-lg',
+            'text-gray-300 transition-colors',
+            currentPage === 1 
+              ? 'cursor-not-allowed opacity-50' 
+              : 'hover:bg-gray-800'
+          )}
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+  
+        {/* Sayfa numaraları */}
+        {Array.from({ length: totalPages }).map((_, index) => (
           <button
-            key={pageNumber}
-            onClick={() => onPageChange(pageNumber as number)}
+            key={index}
+            onClick={() => onPageChange(index + 1)}
             className={cn(
               'h-10 w-10 rounded-lg text-sm transition-colors',
-              currentPage === pageNumber
-                ? 'bg-blue-500 text-white'
-                : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+              currentPage === index + 1
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:bg-gray-800'
             )}
           >
-            {pageNumber}
+            {index + 1}
           </button>
-        );
-      })}
-
-      <button
-        onClick={onNext}
-        disabled={currentPage === Math.ceil(totalItems / itemsPerPage)}
-        className={cn(
-          'flex h-10 w-10 items-center justify-center rounded-lg transition-colors',
-          currentPage === Math.ceil(totalItems / itemsPerPage)
-            ? 'cursor-not-allowed text-gray-400 dark:text-gray-600'
-            : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-        )}
-      >
-        <ChevronRight className="h-5 w-5" />
-      </button>
-    </div>
-  );
-}
+        ))}
+  
+        {/* Sonraki sayfa butonu */}
+        <button
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={cn(
+            'flex h-10 w-10 items-center justify-center rounded-lg',
+            'text-gray-300 transition-colors',
+            currentPage === totalPages 
+              ? 'cursor-not-allowed opacity-50' 
+              : 'hover:bg-gray-800'
+          )}
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+      </div>
+    );
+  }

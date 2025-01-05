@@ -47,7 +47,7 @@ export default function BlogPostPage() {
     <motion.article
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-white dark:bg-gray-900"
+      className="min-h-screen bg-gray-900 dark:bg-gray-900"
     >
       {/* Hero Section */}
       <div className="relative h-[60vh] min-h-[500px]">
@@ -82,7 +82,7 @@ export default function BlogPostPage() {
           {/* Sidebar */}
           <aside className="space-y-8">
             {/* Author */}
-            <div className="rounded-2xl bg-gray-50 dark:bg-gray-800 p-6">
+            <div className="rounded-2xl bg-gray-800 dark:bg-gray-800 p-6">
               <div className="flex items-center gap-4 mb-4">
                 <Image
                   src={post.author.avatar}

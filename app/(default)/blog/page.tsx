@@ -4,7 +4,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Filter } from 'lucide-react';
-import { PostGrid } from '@/components/PostGrid';
 import { FeaturedPost } from '@/components/FeaturedPost';
 import { Pagination } from '@/components/Pagination';
 import { Post } from '@/app/types';
@@ -20,15 +19,21 @@ const CATEGORIES = [
 ];
 
 export default function BlogPage() {
-  const [posts, setPosts] = useState(POSTS); // Direkt POSTS datasını kullan
+  const [posts, setPosts] = useState<Post[]>(POSTS);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 9;
+  const postsPerPage = 3; // 6'ya düşürdük, grid yapısı için daha uygun
 
+  // Featured post'u ana listeden çıkar
+  const displayPosts = currentPage === 1 && !searchQuery && selectedCategory === 'All'
+    ? posts.slice(1) // İlk post featured olarak gösterilecek
+    : posts;
+
+  // Filtreleme ve sayfalama mantığını düzeltelim
   const filteredPosts = posts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
@@ -36,9 +41,15 @@ export default function BlogPage() {
     return matchesSearch && matchesCategory;
   });
 
+  // Sayfalama için postları bölme
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Sayfa değiştiğinde scroll'u yukarı al
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   // Sayfa değiştiğinde scroll'u yukarı al
   useEffect(() => {
@@ -58,7 +69,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-gray-900 dark:bg-gray-900 transition-colors duration-200">
       {/* Hero Section */}
-      <motion.section 
+      <motion.section
         className="relative bg-gradient-to-r from-gray-900 to-gray-800 pt-32 pb-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -129,15 +140,25 @@ export default function BlogPage() {
       </div>
 
       {/* Main Content */}
+      {/* Main Content */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          {/* Featured Post - Sadece ilk sayfada göster */}
-          {currentPage === 1 && !searchQuery && selectedCategory === 'All' && (
-            <div className="mb-12">
-              <FeaturedPost post={posts[0]} />
-            </div>
-          )}
+          {/* Featured Post - Sadece ilk sayfada ve filtre yokken göster */}
+          <div className="space-y-8">
+            {/* Tüm postları Featured olarak göster */}
+            {currentPosts.map((post) => (
+              <FeaturedPost key={post.id} post={post} />
+            ))}
 
+            {/* Post bulunamadı mesajı */}
+            {currentPosts.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-400">
+                  No posts found. Try adjusting your search or filters.
+                </p>
+              </div>
+            )}
+          </div>
           {/* Error State */}
           {error && (
             <div className="rounded-lg bg-red-50 dark:bg-red-900/10 p-4 mb-8">
@@ -145,14 +166,10 @@ export default function BlogPage() {
             </div>
           )}
 
-          {/* Posts Grid */}
-          <PostGrid 
-            posts={currentPosts} 
-            isLoading={isLoading} 
-          />
-
+          {/* Pagination - Toplam sayfa sayısını düzgün hesapla */}
+         
           {/* Pagination */}
-          {!isLoading && filteredPosts.length > postsPerPage && (
+          {filteredPosts.length > postsPerPage && (
             <div className="mt-12">
               <Pagination
                 totalItems={filteredPosts.length}
@@ -164,7 +181,6 @@ export default function BlogPage() {
           )}
         </div>
       </section>
-
       {/* Newsletter Section 
       <NewsletterSection />*/}
     </div>
