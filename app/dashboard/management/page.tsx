@@ -55,7 +55,7 @@ export default function ManagementPage() {
             <tbody className="divide-y divide-gray-200">
               {[
                 {
-                  name: 'John Doe',
+                  name: 'Ali Bayar',
                   email: 'john@example.com',
                   role: 'Admin',
                   status: 'Active',
