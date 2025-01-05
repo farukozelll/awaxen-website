@@ -17,7 +17,7 @@ const LEARNING_PATHS = [
     id: 'solar',
     title: 'Solar Panel Sistemleri',
     description: 'Panel kurulumundan bakıma, tüm solar sistem yönetimini öğrenin',
-    image: '/images/tutorials/solar-path.jpg',
+    image: '/images/solar.png',
     duration: '12 saat',
     modules: 8,
     level: 'beginner'
@@ -26,7 +26,7 @@ const LEARNING_PATHS = [
     id: 'agribot',
     title: 'AgriBot Yönetimi',
     description: 'Tarım robotlarının kurulumu ve yönetimi hakkında kapsamlı eğitim',
-    image: '/images/tutorials/agribot-path.jpg',
+    image: '/images/agribot.jpg',
     duration: '15 saat',
     modules: 10,
     level: 'intermediate'
@@ -35,7 +35,7 @@ const LEARNING_PATHS = [
     id: 'ai',
     title: 'AI Model Optimizasyonu',
     description: 'Yapay zeka modellerinin eğitimi ve optimizasyonu',
-    image: '/images/tutorials/ai-path.jpg',
+    image: '/images/ai-analysis.webp',
     duration: '20 saat',
     modules: 12,
     level: 'advanced'
@@ -50,7 +50,7 @@ const LATEST_TUTORIALS = [
     duration: '45 dakika',
     level: 'intermediate',
     instructor: 'Ahmet Yılmaz',
-    image: '/images/tutorials/cleaning.jpg'
+    image: '/images/tutorials/solar-cleaning.jpeg'
   },
   {
     id: 2,
@@ -68,7 +68,7 @@ const LATEST_TUTORIALS = [
     duration: '30 dakika',
     level: 'beginner',
     instructor: 'Ayşe Kaya',
-    image: '/images/tutorials/analytics.jpg'
+    image: '/images/tutorials/analytics.webp'
   }
 ];
 
@@ -80,7 +80,7 @@ const POPULAR_WORKSHOPS = [
     time: '14:00',
     instructor: 'Ahmet Yılmaz',
     participants: 45,
-    image: '/images/workshops/solar.jpg'
+    image: '/images/tutorials/Installing-solar-panels.jpg'
   },
   {
     id: 2,
@@ -89,7 +89,7 @@ const POPULAR_WORKSHOPS = [
     time: '15:30',
     instructor: 'Ayşe Kaya',
     participants: 32,
-    image: '/images/workshops/ai.jpg'
+    image: '/images/tutorials/ai-model.avif'
   }
 ];
 
@@ -99,12 +99,19 @@ const STYLES = {
     wrapper: cn(
       'relative pt-24 sm:pt-32 lg:pt-40',
       'pb-16 sm:pb-20 lg:pb-24',
-      'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]'
+      'bg-gradient-to-br'
     ),
-    content: 'container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl'
+    content: 'container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl',
+    background: cn(
+      'absolute mt-20 bg-cover inset-0',
+      'bg-[url("/images/bg-1.svg")]',
+      'w-full h-64 object-cover',
+      '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
+      '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
+    )
   },
   sections: {
-    wrapper: 'container mx-auto px-4 sm:px-6 lg:px-8 py-16',
+    wrapper: 'container mx-auto px-4 sm:px-6 lg:px-8 pb-16',
     title: 'text-2xl font-bold text-white mb-8'
   },
   filters: {
@@ -167,6 +174,7 @@ export default function TutorialsPage() {
   return (
     <main className={STYLES.container}>
       {/* Header */}
+      <div className={STYLES.header.background}></div>
       <section className={STYLES.header.wrapper}>
         <div className={STYLES.header.content}>
           <motion.h1
