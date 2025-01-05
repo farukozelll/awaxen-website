@@ -52,7 +52,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
             </div>
 
             {/* Title and Subtitle */}
-            <h2 className="text-2xl lg:text-3xl font-bold text-blue-500  dark:text-white group-hover:text-blue-500 transition-colors mb-4">
+            <h2 className="text-2xl lg:text-3xl font-bold text-white  dark:text-white group-hover:text-blue-500 transition-colors mb-4">
               {post.title}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-8 line-clamp-3">

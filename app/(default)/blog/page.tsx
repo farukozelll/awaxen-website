@@ -27,6 +27,7 @@ export default function BlogPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3; // 6'ya düşürdük, grid yapısı için daha uygun
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   // Featured post'u ana listeden çıkar
   const displayPosts = currentPage === 1 && !searchQuery && selectedCategory === 'All'
@@ -65,7 +66,13 @@ export default function BlogPage() {
     setSelectedCategory(e.target.value);
     setCurrentPage(1); // Kategori değiştiğinde ilk sayfaya dön
   };
-
+  const handleTagToggle = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
+  };
   return (
     <div className="min-h-screen bg-gray-900 dark:bg-gray-900 transition-colors duration-200">
       {/* Hero Section */}
@@ -90,54 +97,105 @@ export default function BlogPage() {
       </motion.section>
 
       {/* Search and Filter Bar */}
-      <div className="sticky top-0 z-20 border-b bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm transition-colors duration-200">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            {/* Search Input */}
-            <div className="relative flex w-full max-w-md items-center">
-              <Search className="absolute left-3 h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search articles..."
-                value={searchQuery}
-                onChange={handleSearch}
-                className="w-full rounded-full border border-gray-800 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 pl-10 pr-4 text-gray-900 dark:text-gray-100"
-              />
-            </div>
-
-            {/* Filters */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className={cn(
-                  "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                  "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300",
-                  "hover:bg-gray-200 dark:hover:bg-gray-700"
-                )}
-              >
-                <Filter className="h-4 w-4" />
-                Filters
-              </button>
-              <select
-                value={selectedCategory}
-                onChange={handleCategoryChange}
-                className={cn(
-                  "rounded-full border border-gray-200 dark:border-gray-700 px-4 py-2",
-                  "text-sm font-medium text-gray-700 dark:text-gray-300",
-                  "bg-white dark:bg-gray-800",
-                  "focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                )}
-              >
-                {CATEGORIES.map(category => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
+     {/* Search and Filter Bar */}
+<div className="sticky top-0 z-20 border-b border-gray-800/50 bg-gray-900/90 backdrop-blur-md shadow-lg transition-all duration-200">
+  <div className="container mx-auto px-4">
+    <div className="flex flex-col sm:flex-row items-center gap-4 py-4">
+      {/* Search Input */}
+      <div className="relative flex w-full sm:max-w-md">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <Search className="h-5 w-5 text-gray-400" />
         </div>
+        <input
+          type="text"
+          placeholder="Search articles..."
+          value={searchQuery}
+          onChange={handleSearch}
+          className="w-full bg-gray-800/50 text-gray-100 placeholder-gray-400 rounded-xl 
+                     border border-gray-700/50 py-2.5 pl-10 pr-4
+                     focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50
+                     transition-all duration-200"
+        />
       </div>
+
+      {/* Filters Group */}
+      <div className="flex items-center gap-3 ml-auto">
+        {/* Filter Button */}
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2.5 rounded-xl",
+            "text-sm font-medium transition-all duration-200",
+            "bg-gray-800/50 text-gray-300 border border-gray-700/50",
+            "hover:bg-gray-800 hover:border-gray-600",
+            showFilters && "bg-blue-500/10 border-blue-500/50 text-blue-400"
+          )}
+        >
+          <Filter className="h-4 w-4" />
+          <span>Filter</span>
+        </button>
+
+        {/* Category Select */}
+        <select
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          className={cn(
+            "appearance-none rounded-xl px-4 py-2.5",
+            "text-sm font-medium text-gray-300",
+            "bg-gray-800/50 border border-gray-700/50",
+            "hover:bg-gray-800 hover:border-gray-600",
+            "focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50",
+            "transition-all duration-200",
+            "cursor-pointer"
+          )}
+        >
+          {CATEGORIES.map(category => (
+            <option
+              key={category}
+              value={category}
+              className="bg-gray-800 text-gray-300 py-2"
+            >
+              {category}
+            </option>
+          ))}
+        </select>
+
+        {/* Tags Filter - Conditional Render */}
+        {showFilters && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-full left-0 right-0 mt-1 p-4 bg-gray-900/95 
+                      border-t border-gray-800/50 backdrop-blur-md shadow-xl"
+          >
+            <div className="container mx-auto">
+              <div className="flex flex-wrap gap-2">
+                {['AI', 'IoT', 'Cloud', 'Security', 'Mobile', 'Data'].map((tag) => (
+                  <button
+                    key={tag}
+                    className={cn(
+                      "px-3 py-1.5 rounded-lg text-sm font-medium",
+                      "transition-all duration-200",
+                      "border border-gray-700/50",
+                      "hover:border-blue-500/50 hover:bg-blue-500/10",
+                      "focus:outline-none focus:ring-2 focus:ring-blue-500/50",
+                      selectedTags.includes(tag)
+                        ? "bg-blue-500/20 text-blue-400 border-blue-500/50"
+                        : "bg-gray-800/50 text-gray-400"
+                    )}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
 
       {/* Main Content */}
       {/* Main Content */}
