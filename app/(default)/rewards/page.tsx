@@ -12,7 +12,7 @@ const GALLERY_ITEMS = [
     category: 'solar',
     title: 'Solar Panel İzleme Sistemi',
     description: 'Akıllı izleme ve bakım sistemimizin saha uygulaması',
-    image: '/images/gallery/solar-1.jpg',
+    image: '/images/rewards/solar-1.jpeg',
     tags: ['IoT', 'Analytics']
   },
   {
@@ -20,7 +20,7 @@ const GALLERY_ITEMS = [
     category: 'robotics',
     title: 'AgriBot Domates Toplama',
     description: 'Otonom domates toplama robotumuzun sera içi testi',
-    image: '/images/gallery/robot-1.jpg',
+    image: '/images/rewards/robot-1.jpg',
     tags: ['Robotik', 'AI']
   },
   {
@@ -28,15 +28,15 @@ const GALLERY_ITEMS = [
     category: 'ai',
     title: 'Yapay Zeka Destekli Analiz',
     description: 'Hastalık tespit sistemimizin görsel analizi',
-    image: '/images/gallery/ai-1.jpg',
+    image: '/images/rewards/ai-1.webp',
     tags: ['AI', 'ML']
   },
   {
     id: 4,
     category: 'solar',
-    title: 'Panel Bakım İstasyonu',
+    title: 'c',
     description: 'Otomatik temizleme ve bakım istasyonumuz',
-    image: '/images/gallery/solar-2.jpg',
+    image: '/images/rewards/solar-2.jpg',
     tags: ['Otomasyon']
   },
   {
@@ -44,7 +44,7 @@ const GALLERY_ITEMS = [
     category: 'robotics',
     title: 'AgriBot Navigasyon',
     description: 'Sera içi hassas navigasyon sistemi',
-    image: '/images/gallery/robot-2.jpg',
+    image: '/images/rewards/robot-2.jpg',
     tags: ['Navigasyon']
   },
   {
@@ -52,7 +52,7 @@ const GALLERY_ITEMS = [
     category: 'lab',
     title: 'AR-GE Laboratuvarı',
     description: 'Yeni nesil sensör geliştirme çalışmaları',
-    image: '/images/gallery/lab-1.jpg',
+    image: '/images/rewards/lab-1.webp',
     tags: ['AR-GE']
   }
 ];
@@ -74,21 +74,23 @@ const STYLES = {
     wrapper: cn(
       'relative pt-24 sm:pt-32 lg:pt-40',
       'pb-16 sm:pb-20 lg:pb-24',
-      'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]'
+      'bg-gradient-to-br '
     ),
     content: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8',
+      'relative z-1 container mx-auto px-4 sm:px-6 lg:px-8',
       'text-center max-w-4xl'
     ),
     background: cn(
-      'absolute inset-0',
-      'opacity-10',
-      'bg-[url("/images/grid.svg")]'
+      'absolute mt-20 bg-cover inset-0',
+      'bg-[url("/images/bg-1.svg")]',
+      'w-full h-64 object-cover',
+      '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
+      '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
     )
   },
   filters: {
     wrapper: cn(
-      'sticky top-0 z-10',
+      'sticky top-0 z-10 border-b [border-image:linear-gradient(to_right,transparent,theme(colors.slate.500/.25),transparent)1]',
       'backdrop-blur-md bg-[#0A0F1E]/80',
       'py-4 mb-8'
     ),
