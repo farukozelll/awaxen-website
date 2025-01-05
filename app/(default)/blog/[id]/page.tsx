@@ -101,7 +101,7 @@ export default function BlogPostPage() {
             </div>
 
             {/* Meta Information */}
-            <div className="rounded-2xl bg-gray-50 dark:bg-gray-800 p-6 space-y-4">
+            <div className="rounded-2xl bg-gray-800 dark:bg-gray-800 p-6 space-y-4">
               <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                 <Calendar className="h-5 w-5" />
                 <span>{post.publishDate}</span>
@@ -124,7 +124,7 @@ export default function BlogPostPage() {
             </div>
 
             {/* Share Section */}
-            <div className="rounded-2xl bg-gray-50 dark:bg-gray-800 p-6">
+            <div className="rounded-2xl bg-gray-800 dark:bg-gray-800 p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Share this article
               </h3>
@@ -145,7 +145,7 @@ export default function BlogPostPage() {
             </div>
 
             {/* Related Posts */}
-            <div className="rounded-2xl bg-gray-50 dark:bg-gray-800 p-6">
+            <div className="rounded-2xl bg-gray-800 dark:bg-gray-800 p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Related Articles
               </h3>

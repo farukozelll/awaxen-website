@@ -16,7 +16,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300"
+      className="group relative overflow-hidden rounded-2xl bg-gray-800 dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300"
     >
       <Link href={`/blog/${post.id}`}>
         <div className="grid grid-cols-1 lg:grid-cols-2">
