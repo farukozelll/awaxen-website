@@ -79,13 +79,19 @@ const STYLES = {
     wrapper: cn(
       'relative pt-24 sm:pt-32 lg:pt-40',
       'pb-16 sm:pb-20 lg:pb-24',
-      'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]'
+      'bg-gradient-to-br'
     ),
     content: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8',
+      'container mt-5  mx-auto px-4 sm:px-6 lg:px-8',
       'text-center max-w-4xl'
     ),
-    background: 'absolute inset-0 opacity-10 bg-[url("/images/grid.png")]'
+    background: cn(
+      'absolute mt-20 bg-cover inset-0 opacity-10',
+      'bg-[url("/images/grid.png")]',
+      'w-full h-64 object-cover',
+      '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
+      '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
+    )
   },
   products: {
     wrapper: 'container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl -mt-16',

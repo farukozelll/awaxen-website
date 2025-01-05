@@ -28,7 +28,7 @@ const STYLES = {
     'w-[calc(100%+40px)] h-[calc(100%+40px)]',
     'opacity-50 pointer-events-none',
     'bg-center bg-no-repeat bg-cover',
-    'transition-all duration-700'
+    'transition-all duration-100 ease-out'
   ),
   cardContent: cn(
     'absolute inset-0 p-6',
@@ -53,27 +53,23 @@ const STYLES = {
 };
 
 const ParallaxCard: React.FC<ParallaxCardProps> = ({ feature, index }) => {
-  // HTMLDivElement olarak açıkça belirtiyoruz
   const cardRef = useRef<HTMLDivElement | null>(null);
 
-  // Mouse position values
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Spring configurations
   const springConfig = {
-    stiffness: 150,
-    damping: 20,
+    stiffness: 1150,
+    damping: 150,
     mass: 5
   };
 
-  // Card rotations with easing
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [30, -30]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-30, 30]), springConfig);
+  // Dönme açılarını azaltarak hassasiyeti azaltma
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
 
-  // Background movement
-  const bgX = useSpring(useTransform(mouseX, [-0.5, 0.5], [40, -40]), springConfig);
-  const bgY = useSpring(useTransform(mouseY, [-0.5, 0.5], [40, -40]), springConfig);
+  const bgX = useSpring(useTransform(mouseX, [-0.5, 0.5], [20, -20]), springConfig);
+  const bgY = useSpring(useTransform(mouseY, [-0.5, 0.5], [20, -20]), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -113,7 +109,6 @@ const ParallaxCard: React.FC<ParallaxCardProps> = ({ feature, index }) => {
           transformStyle: 'preserve-3d'
         }}
       >
-        {/* Background Image with Parallax */}
         <motion.div 
           className={STYLES.cardBg}
           style={{ 
@@ -123,9 +118,7 @@ const ParallaxCard: React.FC<ParallaxCardProps> = ({ feature, index }) => {
           }}
         />
 
-        {/* Card Content */}
         <div className={STYLES.cardContent}>
-          {/* Icon */}
           <div className="relative w-12 h-12 mb-auto z-10">
             <Image
               src={feature.icon}
@@ -135,9 +128,7 @@ const ParallaxCard: React.FC<ParallaxCardProps> = ({ feature, index }) => {
             />
           </div>
 
-          {/* Info Section */}
           <div className={STYLES.cardInfo}>
-            {/* Tag */}
             <span className="inline-block px-3 py-1 mb-3 text-xs font-medium bg-white/20 rounded-full">
               {feature.tag}
             </span>
@@ -149,7 +140,6 @@ const ParallaxCard: React.FC<ParallaxCardProps> = ({ feature, index }) => {
               {feature.description}
             </p>
 
-            {/* Highlights */}
             <div className="space-y-2 mt-4">
               {feature.highlights.map((highlight, i) => (
                 <motion.div
@@ -177,7 +167,6 @@ const ParallaxCard: React.FC<ParallaxCardProps> = ({ feature, index }) => {
             </div>
           </div>
 
-          {/* Overlay Gradient */}
           <div 
             className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
           />
