@@ -37,10 +37,10 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
           <div className="p-8 lg:p-12 flex flex-col justify-center">
             {/* Category and Source */}
             <div className="flex items-center gap-3 mb-6">
-              <span className="inline-flex items-center rounded-full bg-blue-900 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-800 dark:text-blue-200">
+              <span className="inline-flex items-center rounded-full bg-blue-900 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-200 dark:text-blue-200">
                 Featured
               </span>
-              <span className="inline-flex items-center rounded-full bg-blue-900 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-800 dark:text-blue-200">
+              <span className="inline-flex items-center rounded-full bg-blue-900 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-200 dark:text-blue-200">
                 {post.category}
               </span>
               {post.source === 'medium' && (

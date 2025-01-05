@@ -92,21 +92,21 @@ export default function BlogPostPage() {
                   className="rounded-full"
                 />
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="text-lg font-semibold text-white dark:text-white">
                     {post.author.name}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300">{post.author.role}</p>
+                  <p className="text-gray-300 dark:text-gray-300">{post.author.role}</p>
                 </div>
               </div>
             </div>
 
             {/* Meta Information */}
             <div className="rounded-2xl bg-gray-800 dark:bg-gray-800 p-6 space-y-4">
-              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+              <div className="flex items-center gap-2 text-gray-300 dark:text-gray-300">
                 <Calendar className="h-5 w-5" />
                 <span>{post.publishDate}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+              <div className="flex items-center gap-2 text-gray-300 dark:text-gray-300">
                 <Clock className="h-5 w-5" />
                 <span>{post.readTime} min read</span>
               </div>
@@ -114,7 +114,7 @@ export default function BlogPostPage() {
                 {post.tags.map(tag => (
                   <span
                     key={tag}
-                    className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-800 dark:text-blue-200"
+                    className="inline-flex items-center rounded-full bg-blue-900 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-200 dark:text-blue-200"
                   >
                     <Tag className="mr-1 h-4 w-4" />
                     {tag}
@@ -125,7 +125,7 @@ export default function BlogPostPage() {
 
             {/* Share Section */}
             <div className="rounded-2xl bg-gray-800 dark:bg-gray-800 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-lg font-semibold text-white dark:text-white mb-4">
                 Share this article
               </h3>
               <div className="flex gap-4">
@@ -146,7 +146,7 @@ export default function BlogPostPage() {
 
             {/* Related Posts */}
             <div className="rounded-2xl bg-gray-800 dark:bg-gray-800 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-lg font-semibold text-white dark:text-white mb-4">
                 Related Articles
               </h3>
               <div className="space-y-4">
@@ -167,7 +167,7 @@ export default function BlogPostPage() {
                           className="object-cover transition-transform group-hover:scale-105"
                         />
                       </div>
-                      <h4 className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
+                      <h4 className="text-sm font-medium text-white dark:text-white group-hover:text-blue-500 transition-colors">
                         {relatedPost.title}
                       </h4>
                     </Link>
