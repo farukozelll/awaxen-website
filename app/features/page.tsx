@@ -13,8 +13,8 @@ const FEATURES = [
     title: 'Solar Panel Analytics',
     tag: 'Ana Ürün',
     description: 'Güneş panellerinizin performansını gerçek zamanlı izleyin, bakım ihtiyaçlarını öngörün ve enerji verimliliğini optimize edin.',
-    icon: '/icons/solar-panel.svg',
-    image: '/images/features/sea.avif',
+    icon: '/images/farm.svg',
+    image: '/images/mgea-solar.png',
     highlights: [
       'Gerçek zamanlı performans izleme',
       'Yapay zeka destekli bakım öngörüleri',
@@ -26,8 +26,8 @@ const FEATURES = [
     title: 'AgriBot Harvester',
     tag: 'Ar-Ge Projesi',
     description: 'Yapay zeka destekli otonom domates toplama robotu ile tarımda verimliliği artırın.',
-    icon: '/icons/robot.svg',
-    image: '/images/features/kızıl.avif',
+    icon: '/images/robot.svg',
+    image: '/images/features/agriculture-robot-working.avif',
     highlights: [
       'Otonom hareket ve toplama',
       'Hassas navigasyon sistemi',
@@ -39,8 +39,8 @@ const FEATURES = [
     title: 'CropHealth AI',
     tag: 'Ar-Ge Projesi',
     description: 'Yapay zeka ile domates hastalıklarını erken tespit edin, ürün kaybını minimize edin.',
-    icon: '/icons/plant.svg',
-    image: '/images/features/lake.avif',
+    icon: '/images/artificial-intelligence.svg',
+    image: '/images/features/illustration-smart-farming.avif',
     highlights: [
       'Gerçek zamanlı hastalık tespiti',
       'Detaylı hastalık raporları',
@@ -163,9 +163,6 @@ const CheckIcon = () => (
   </svg>
 );
 
-
-
-// Ana komponent içinde kullanımı
 export default function FeaturesPage() {
   return (
     <div className={STYLES.container}>
