@@ -53,28 +53,24 @@ const FEATURES = [
 const STYLES = {
   container: cn(
     'min-h-screen bg-[#0A0F1E]',
-    'pb-16 pt-36 sm:pb-20 lg:pb-24'
+    'pb-16 sm:pb-20 lg:pb-24'
   ),
   header: {
     wrapper: cn(
       'relative pt-24 sm:pt-32 lg:pt-40',
       'pb-16 sm:pb-20 lg:pb-24',
-      'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]'
+      'bg-gradient-to-br '
     ),
     content: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8',
+      'relative z-1 container mx-auto px-4 sm:px-6 lg:px-8',
       'text-center max-w-4xl'
     ),
-    title: cn(
-      'text-4xl sm:text-5xl lg:text-6xl',
-      'font-bold text-white',
-      'tracking-tight leading-none',
-      'mb-6'
-    ),
-    description: cn(
-      'text-lg sm:text-xl',
-      'text-white/90',
-      'max-w-2xl mx-auto'
+    background: cn(
+      'absolute mt-20 bg-cover inset-0',
+      'bg-[url("/images/bg-1.svg")]',
+      'w-full h-64 object-cover',
+      '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
+      '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
     )
   },
   features: {
@@ -147,17 +143,17 @@ const STYLES = {
 };
 
 const CheckIcon = () => (
-  <svg 
+  <svg
     className={STYLES.features.card.highlights.icon}
-    viewBox="0 0 24 24" 
-    fill="none" 
+    viewBox="0 0 24 24"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path 
-      d="M20 6L9 17L4 12" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
+    <path
+      d="M20 6L9 17L4 12"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
       strokeLinejoin="round"
     />
   </svg>
@@ -167,7 +163,27 @@ export default function FeaturesPage() {
   return (
     <div className={STYLES.container}>
       {/* ... Header Section ... */}
-
+      {/* Header */}
+      <section className={STYLES.header.wrapper}>
+        <div className={STYLES.header.background} />
+        <div className={STYLES.header.content}>
+          <motion.h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            Ürünlerimiz
+          </motion.h1>
+          <motion.p
+            className="text-xl text-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            Tarım ve enerji sektöründe yenilikçi teknoloji çözümleri
+          </motion.p>
+        </div>
+      </section>
       <section className={STYLES.features.container}>
         <div className={STYLES.features.grid}>
           {FEATURES.map((feature, index) => (

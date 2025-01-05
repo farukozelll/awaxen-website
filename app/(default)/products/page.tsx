@@ -82,7 +82,7 @@ const STYLES = {
       'bg-gradient-to-br'
     ),
     content: cn(
-      'relative z-1 container mt-5  mx-auto px-4 sm:px-6 lg:px-8',
+      'relative z-1 container  mx-auto px-4 sm:px-6 lg:px-8',
       'text-center max-w-4xl'
     ),
     background: cn(
