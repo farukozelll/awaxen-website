@@ -13,7 +13,7 @@ const FOOTER_DATA = [
       { label: 'Çözümler', href: '/products' },
       { label: 'Ürünler', href: '/features' },
       { label: 'Projeler', href: '/rewards' },
-      { label: 'Eğitimler', href: '/tutorials' },
+
     ]
   },
   {
@@ -22,7 +22,7 @@ const FOOTER_DATA = [
       { label: 'Hakkımızda', href: '/about' },
       { label: 'Blog', href: '/blog' },
       { label: 'Fiyatlandırma', href: '/pricing' },
-      { label: 'Basın Haber', href: '/press' },
+      { label: 'Eğitimler', href: '/tutorials' },
     ]
   },
   {

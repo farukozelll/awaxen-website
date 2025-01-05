@@ -1,306 +1,188 @@
+// app/blog/page.tsx
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { Search, Filter } from 'lucide-react';
+import { PostGrid } from '@/components/PostGrid';
+import { FeaturedPost } from '@/components/FeaturedPost';
+import { Pagination } from '@/components/Pagination';
+import { Post } from '@/app/types';
 import { cn } from '@/utils/utils';
-import Footer from "@/components/ui/footer";
+import { POSTS } from './data/posts';
 
-const TEAM_MEMBERS = [
-  {
-    name: 'Takım Üyesi 1',
-    role: 'CEO & Kurucu',
-    specialty: 'Robotik & Otomasyon',
-    image: '/images/team/member1.jpg',
-    linkedin: '#'
-  },
-  {
-    name: 'Takım Üyesi 2',
-    role: 'CTO',
-    specialty: 'Solar Sistemler & IoT',
-    image: '/images/team/member2.jpg',
-    linkedin: '#'
-  },
-  {
-    name: 'Takım Üyesi 3',
-    role: 'Ar-Ge Direktörü',
-    specialty: 'Yapay Zeka & ML',
-    image: '/images/team/member3.jpg',
-    linkedin: '#'
-  }
+// Kategorileri ayrı bir constants dosyasına taşıyabilirsiniz
+const CATEGORIES = [
+  'All',
+  'Technology',
+  'Innovation',
+  'Sustainability'
 ];
 
-const ACHIEVEMENTS = [
-  { 
-    label: 'Kurulu Panel', 
-    value: '1000+',
-    icon: '/icons/solar-panel.svg'
-  },
-  { 
-    label: 'Sera Alanı', 
-    value: '50+ Dönüm',
-    icon: '/icons/greenhouse.svg'
-  },
-  { 
-    label: 'Verim Artışı', 
-    value: '%30',
-    icon: '/icons/growth.svg'
-  },
-  { 
-    label: 'Ar-Ge Projesi', 
-    value: '3',
-    icon: '/icons/research.svg'
-  }
-];
+export default function BlogPage() {
+  const [posts, setPosts] = useState(POSTS); // Direkt POSTS datasını kullan
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showFilters, setShowFilters] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 9;
 
-const VALUES = [
-  {
-    title: 'İnovasyon',
-    description: 'Sürekli gelişim ve yenilikçi çözümlerle sektöre öncülük ediyoruz.',
-    icon: '/icons/innovation.svg'
-  },
-  {
-    title: 'Sürdürülebilirlik',
-    description: 'Çevre dostu teknolojilerle sürdürülebilir bir gelecek inşa ediyoruz.',
-    icon: '/icons/sustainability.svg'
-  },
-  {
-    title: 'Verimlilik',
-    description: 'Otomasyon ve yapay zeka ile verimliliği maksimize ediyoruz.',
-    icon: '/icons/efficiency.svg'
-  }
-];
+/*   useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setIsLoading(true);
+        // Gerçek uygulamada API çağrısı yapılacak
+        setPosts(POSTS);
+      } catch (err) {
+        setError('Failed to fetch posts');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-const STYLES = {
-  container: cn(
-    'min-h-screen bg-[#0A0F1E]',
-    'pb-16 sm:pb-20 lg:pb-24'
-  ),
-  header: {
-    wrapper: cn(
-      'relative pt-24 sm:pt-32 lg:pt-40',
-      'pb-32 sm:pb-40 lg:pb-48',
-      'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]',
-      'overflow-hidden'
-    ),
-    content: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8',
-      'text-center max-w-4xl',
-      'relative z-10'
-    ),
-    background: cn(
-      'absolute inset-0',
-      'opacity-10',
-      'bg-[url("/images/grid.svg")]'
-    ),
-    overlay: cn(
-      'absolute inset-0',
-      'bg-gradient-to-b from-transparent to-[#0A0F1E]'
-    )
-  },
-  sections: {
-    wrapper: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8',
-      'max-w-7xl -mt-24',
-      'space-y-24'
-    ),
-    title: cn(
-      'text-3xl font-bold text-white',
-      'mb-12 text-center'
-    ),
-    grid: {
-      two: 'grid grid-cols-1 lg:grid-cols-2 gap-12',
-      three: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
-    },
-    card: {
-      base: cn(
-        'bg-white/5 backdrop-blur-sm',
-        'rounded-2xl p-8',
-        'border border-white/10',
-        'transition-all duration-300',
-        'hover:bg-white/10',
-        'group'
-      ),
-      highlight: cn(
-        'bg-gradient-to-br from-white/10 to-transparent',
-        'backdrop-blur-sm rounded-2xl p-8',
-        'border border-white/20',
-        'transition-all duration-300',
-        'hover:border-white/30',
-        'hover:from-white/15'
-      )
-    }
-  },
-  team: {
-    card: cn(
-      'relative overflow-hidden rounded-2xl',
-      'bg-gradient-to-br from-white/10 to-transparent',
-      'border border-white/10',
-      'group'
-    ),
-    image: cn(
-      'aspect-[3/4]',
-      'transition-transform duration-500',
-      'group-hover:scale-105'
-    ),
-    content: cn(
-      'absolute bottom-0 left-0 right-0',
-      'p-6 text-center',
-      'bg-gradient-to-t from-black/90 to-transparent'
-    )
-  }
-};
+    fetchPosts();
+  }, []); */
 
-export default function AboutPage() {
+  const filteredPosts = posts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Sayfa değiştiğinde scroll'u yukarı al
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1); // Arama yapıldığında ilk sayfaya dön
+  };
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value);
+    setCurrentPage(1); // Kategori değiştiğinde ilk sayfaya dön
+  };
+
   return (
-    <main className={STYLES.container}>
-      {/* Header Section */}
-      <header className={STYLES.header.wrapper}>
-        <div className={STYLES.header.background} />
-        <div className={STYLES.header.overlay} />
-        
-        <div className={STYLES.header.content}>
-          <motion.h1 
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            Teknoloji ile Yarına<br />Işık Tutuyoruz
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-white/80"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            Tarım ve enerji sektöründe yenilikçi teknolojiler geliştirerek,<br />
-            daha verimli ve sürdürülebilir bir gelecek inşa ediyoruz.
-          </motion.p>
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+      {/* Hero Section */}
+      <motion.section 
+        className="relative bg-gradient-to-r from-gray-900 to-gray-800 pt-32 pb-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10" />
         </div>
-      </header>
-
-      <div className={STYLES.sections.wrapper}>
-        {/* Story Section */}
-        <section className={STYLES.sections.grid.two}>
-          <motion.div 
-            className={STYLES.sections.card.highlight}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl font-bold text-white mb-6">Hikayemiz</h2>
-            <p className="text-white/80 leading-relaxed mb-6">
-              Awaxen, 2023 yılında çiftçilerin hayatını kolaylaştırma vizyonuyla yola çıktı. 
-              İsmimiz "awakening" (uyanış) kelimesinden geliyor - çünkü biz inanıyoruz ki teknoloji, 
-              tarım ve enerji sektöründe yeni bir uyanışın öncüsü olacak.
+        <div className="container relative mx-auto px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <h1 className="mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+              Insights & Perspectives
+            </h1>
+            <p className="text-lg leading-8 text-gray-300">
+              Exploring the intersection of technology, sustainability, and innovation.
             </p>
-            <p className="text-white/80 leading-relaxed">
-              Bugün, otonom tarım robotlarından güneş paneli yönetim sistemlerine, 
-              yapay zeka destekli hastalık tespitinden verim optimizasyonuna kadar geniş bir 
-              yelpazede çözümler sunuyoruz.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="relative rounded-2xl overflow-hidden aspect-[4/3]"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <Image
-              src="/images/about/story.jpg"
-              alt="Our Story"
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-        </section>
-
-        {/* Achievements Section */}
-        <section>
-          <h2 className={STYLES.sections.title}>Rakamlarla Awaxen</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {ACHIEVEMENTS.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className={STYLES.sections.card.base}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Image
-                  src={stat.icon}
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="mb-4 text-blue-400"
-                />
-                <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-sm text-white/70">{stat.label}</div>
-              </motion.div>
-            ))}
           </div>
-        </section>
+        </div>
+      </motion.section>
 
-        {/* Values Section */}
-        <section>
-          <h2 className={STYLES.sections.title}>Değerlerimiz</h2>
-          <div className={STYLES.sections.grid.three}>
-            {VALUES.map((value, index) => (
-              <motion.div
-                key={value.title}
-                className={STYLES.sections.card.base}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Image
-                  src={value.icon}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="mb-4"
-                />
-                <h3 className="text-xl font-semibold text-white mb-3">{value.title}</h3>
-                <p className="text-white/70">{value.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+      {/* Search and Filter Bar */}
+      <div className="sticky top-0 z-20 border-b bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm transition-colors duration-200">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            {/* Search Input */}
+            <div className="relative flex w-full max-w-md items-center">
+              <Search className="absolute left-3 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={handleSearch}
+                className="w-full rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 py-2 pl-10 pr-4 text-gray-900 dark:text-gray-100"
+              />
+            </div>
 
-        {/* Team Section */}
-        <section>
-          <h2 className={STYLES.sections.title}>Ekibimiz</h2>
-          <div className={STYLES.sections.grid.three}>
-            {TEAM_MEMBERS.map((member, index) => (
-              <motion.div
-                key={member.name}
-                className={STYLES.team.card}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+            {/* Filters */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className={cn(
+                  "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                  "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300",
+                  "hover:bg-gray-200 dark:hover:bg-gray-700"
+                )}
               >
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  width={400}
-                  height={600}
-                  className={STYLES.team.image}
-                />
-                <div className={STYLES.team.content}>
-                  <h3 className="text-xl font-semibold text-white mb-1">{member.name}</h3>
-                  <p className="text-blue-400 mb-2">{member.role}</p>
-                  <p className="text-sm text-white/70">{member.specialty}</p>
-                </div>
-              </motion.div>
-            ))}
+                <Filter className="h-4 w-4" />
+                Filters
+              </button>
+              <select
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className={cn(
+                  "rounded-full border border-gray-200 dark:border-gray-700 px-4 py-2",
+                  "text-sm font-medium text-gray-700 dark:text-gray-300",
+                  "bg-white dark:bg-gray-800",
+                  "focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                )}
+              >
+                {CATEGORIES.map(category => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </section>
+        </div>
       </div>
 
+      {/* Main Content */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          {/* Featured Post - Sadece ilk sayfada göster */}
+          {currentPage === 1 && !searchQuery && selectedCategory === 'All' && (
+            <div className="mb-12">
+              <FeaturedPost post={posts[0]} />
+            </div>
+          )}
 
-    </main>
+          {/* Error State */}
+          {error && (
+            <div className="rounded-lg bg-red-50 dark:bg-red-900/10 p-4 mb-8">
+              <p className="text-red-600 dark:text-red-400">{error}</p>
+            </div>
+          )}
+
+          {/* Posts Grid */}
+          <PostGrid 
+            posts={currentPosts} 
+            isLoading={isLoading} 
+          />
+
+          {/* Pagination */}
+          {!isLoading && filteredPosts.length > postsPerPage && (
+            <div className="mt-12">
+              <Pagination
+                totalItems={filteredPosts.length}
+                itemsPerPage={postsPerPage}
+                currentPage={currentPage}
+                onPageChange={setCurrentPage}
+              />
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Newsletter Section 
+      <NewsletterSection />*/}
+    </div>
   );
 }
