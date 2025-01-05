@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/utils/utils';
-import Footer from "@/components/ui/footer";
 
 const FAQ_CATEGORIES = [
   { id: 'general', name: 'Genel' },
@@ -61,9 +60,20 @@ const STYLES = {
     'py-24 px-4 sm:px-6 lg:px-8'
   ),
   header: {
-    wrapper: 'text-center max-w-3xl mx-auto mb-16',
+    wrapper: cn(
+      'relative text-center pt-16',
+      'pb-16 sm:pb-20 lg:pb-24',
+      'bg-gradient-to-br'
+    ),
     title: 'text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6',
-    description: 'text-lg sm:text-xl text-white/80'
+    description: 'text-lg sm:text-xl text-white/80',
+    background: cn(
+      'absolute mt-20 bg-cover inset-0',
+      'bg-[url("/images/bg-1.svg")]',
+      'w-full h-64 object-cover',
+      '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
+      '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
+    )
   },
   categories: {
     wrapper: 'flex flex-wrap justify-center gap-4 mb-16',
@@ -105,17 +115,17 @@ const STYLES = {
 
 // ChevronDown ikonu komponenti
 const ChevronDownIcon = ({ className }: { className?: string }) => (
-  <svg 
+  <svg
     className={className}
-    viewBox="0 0 24 24" 
-    fill="none" 
+    viewBox="0 0 24 24"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path 
-      d="M6 9l6 6 6-6" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
+    <path
+      d="M6 9l6 6 6-6"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
       strokeLinejoin="round"
     />
   </svg>
@@ -126,20 +136,20 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <motion.div 
+    <motion.div
       className={STYLES.faq.item.wrapper}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
     >
-      <button 
+      <button
         className={STYLES.faq.item.button}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className={STYLES.faq.item.question}>{question}</span>
         <ChevronDownIcon className={STYLES.faq.item.icon(isOpen)} />
       </button>
-      
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -161,16 +171,16 @@ export default function FAQPage() {
 
   return (
     <main className={STYLES.container}>
-      {/* Header */}
+      <div className={STYLES.header.background} />
       <div className={STYLES.header.wrapper}>
-        <motion.h1 
+        <motion.h1
           className={STYLES.header.title}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           Sıkça Sorulan Sorular
         </motion.h1>
-        <motion.p 
+        <motion.p
           className={STYLES.header.description}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -199,10 +209,10 @@ export default function FAQPage() {
       {/* FAQ Items */}
       <div className={STYLES.faq.wrapper}>
         {FAQ_DATA[activeCategory as keyof typeof FAQ_DATA].map((item, index) => (
-          <FAQItem 
-            key={index} 
-            question={item.question} 
-            answer={item.answer} 
+          <FAQItem
+            key={index}
+            question={item.question}
+            answer={item.answer}
           />
         ))}
       </div>
