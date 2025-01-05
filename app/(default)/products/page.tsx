@@ -86,8 +86,8 @@ const STYLES = {
       'text-center max-w-4xl'
     ),
     background: cn(
-      'absolute mt-20 bg-cover inset-0 opacity-10',
-      'bg-[url("/images/grid.png")]',
+      'absolute mt-20 bg-cover inset-0',
+      'bg-[url("/images/bg-1.svg")]',
       'w-full h-64 object-cover',
       '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
       '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'

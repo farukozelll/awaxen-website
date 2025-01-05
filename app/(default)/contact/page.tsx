@@ -39,20 +39,26 @@ const STYLES = {
     wrapper: cn(
       'relative pt-24 sm:pt-32 lg:pt-40',
       'pb-16 sm:pb-20 lg:pb-24',
-      'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]'
+      'bg-gradient-to-br'
     ),
     content: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8',
+      'relative container mx-auto px-4 sm:px-6 lg:px-8  z-10',
       'text-center max-w-4xl'
     ),
-    background: 'absolute inset-0 opacity-10 bg-[url("/images/grid.svg")]'
+    background: cn(
+      'absolute mt-20 bg-cover inset-0',
+      'bg-[url("/images/bg-1.svg")]',
+      'w-full h-64 object-cover',
+      '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
+      '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
+    )
   },
   content: {
     wrapper: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8 pt-32',
-      'max-w-7xl -mt-16'
+      'container mx-auto px-4 sm:px-6 lg:px-8 pt-10',
+      'max-w-3xl -mt-16'
     ),
-    grid: 'grid grid-cols-1 lg:grid-cols-2 gap-12'
+    grid: 'grid grid-cols-1 gap-12'
   },
   form: {
     wrapper: cn(
@@ -64,7 +70,7 @@ const STYLES = {
     label: 'block text-sm font-medium text-white mb-2',
     input: cn(
       'w-full px-4 py-3 rounded-lg',
-      'bg-white/10',
+      'bg-black/50',
       'border border-white/10',
       'text-white placeholder-white/50',
       'focus:outline-none focus:ring-2 focus:ring-blue-500',
@@ -72,15 +78,16 @@ const STYLES = {
     ),
     select: cn(
       'w-full px-4 py-3 rounded-lg',
-      'bg-white/10',
+      'bg-black/50', // Changed background color to a darker shade
       'border border-white/10',
       'text-white',
       'focus:outline-none focus:ring-2 focus:ring-blue-500',
       'transition duration-200'
     ),
+
     textarea: cn(
       'w-full px-4 py-3 rounded-lg',
-      'bg-white/10',
+      'bg-black/50',
       'border border-white/10',
       'text-white placeholder-white/50',
       'focus:outline-none focus:ring-2 focus:ring-blue-500',
@@ -123,7 +130,7 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
-    
+
     // Simüle edilmiş form gönderimi
     await new Promise(resolve => setTimeout(resolve, 1500));
     setFormStatus('success');
@@ -237,7 +244,7 @@ export default function ContactPage() {
             ))}
 
             {/* Social Links */}
-{/*             <div className={STYLES.social.wrapper}>
+            {/*             <div className={STYLES.social.wrapper}>
               {Object.entries(CONTACT_INFO.social).map(([platform, url]) => (
                 <a
                   key={platform}
@@ -256,7 +263,7 @@ export default function ContactPage() {
             </div> */}
           </motion.div>
         </div>
-      </div>     
+      </div>
 
     </main>
   );

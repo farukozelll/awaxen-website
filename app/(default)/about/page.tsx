@@ -57,13 +57,13 @@ const STYLES = {
   header: {
     section: cn(
       'relative pt-40 pb-32',
-      'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]',
+      'bg-gradient-to-br',
       'overflow-hidden'
     ),
     content: 'container mx-auto px-4 text-center max-w-4xl relative z-10',
     background: cn(
-      'absolute mt-20 bg-cover inset-0 opacity-10',
-      'bg-[url("/images/bg.svg")]',
+      'absolute mt-20 bg-cover inset-0',
+      'bg-[url("/images/bg-1.svg")]',
       'w-full h-64 object-cover',
       '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
       '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
