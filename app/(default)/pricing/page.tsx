@@ -115,19 +115,25 @@ const STYLES = {
     wrapper: cn(
       'relative pt-24 sm:pt-32 lg:pt-40',
       'pb-16 sm:pb-20 lg:pb-24',
-      'bg-gradient-to-br from-[#0A2463] via-[#247BA0] to-[#006466]'
+      'bg-gradient-to-br'
     ),
     content: cn(
-      'container mx-auto px-4 sm:px-6 lg:px-8',
+      'relative z-1 container mx-auto px-4 sm:px-6 lg:px-8',
       'text-center max-w-4xl'
     ),
-    background: 'absolute inset-0 opacity-10 bg-[url("/images/grid.svg")]'
+    background: cn(
+      'absolute mt-20 bg-cover inset-0',
+      'bg-[url("/images/bg-1.svg")]',
+      'w-full h-64 object-cover',
+      '[mask-image:linear-gradient(to_bottom,transparent,black,transparent)]',
+      '[-webkit-mask-image:linear-gradient(to_bottom,transparent,black,transparent)]'
+    )
   },
   categories: {
     wrapper: cn(
       'sticky top-0 z-10',
       'bg-[#0A0F1E]/80 backdrop-blur-md',
-      'py-4 border-b border-white/10'
+      'py-4'
     ),
     content: 'container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-4'
   },
@@ -161,7 +167,7 @@ const STYLES = {
       period: 'text-lg text-white/60'
     },
     features: {
-      list: 'space-y-3 mt-8',
+      list: 'space-y-3 mt-8  min-h-64',
       item: cn(
         'flex items-start gap-3',
         'text-sm text-white/70'
