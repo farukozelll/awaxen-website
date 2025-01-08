@@ -198,13 +198,13 @@
                  height: 90%;
                  top: 5% !important;
                  left: 5% !important;
-                 min-width: 280px;
-                 min-height: 280px;
+                 min-width: 200px;
+                 min-height: 200px;
              }
  
              @include height {
-                 min-width: 280px;
-                 min-height: 280px;
+                 min-width: 200px;
+                 min-height: 200px;
                  width: 60%;
                  height: 60%;
                  top: 20% !important;
@@ -216,7 +216,7 @@
          .text {
              width: 60%;
              height: 40%;
-             min-width: 400px;
+             min-width: 100px;
              min-height: 500px;
              position: absolute;
              margin: 40px 0;
@@ -232,6 +232,16 @@
              @include sm {
                  min-height: 400px;
                  height: 80%;
+             }
+
+             #buttonGroup{
+                width: 20rem;
+
+                @include sm(){
+                    width: 15rem;
+                    display: flex;
+                    justify-content: space-evenly;
+                }
              }
  
              article {
@@ -255,12 +265,33 @@
  
                  p {
                      color: white;
-                     font-size: 13px;
+                     font-size: 15px;
                      letter-spacing: 0.6px;
                      margin-bottom: 40px;
                      text-shadow: 6px 6px 10px $bg-03;
+
+                     @include sm(){
+                        font-size: 12px;
+                     }
                  }
- 
+
+                 #btn1{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    white-space: nowrap;
+                    width: 100%;
+                    border-radius: .5rem;
+                    font-size: .875rem;
+                    line-height: 1.5;
+                    font-weight: 500;
+
+                    @include sm {
+                        width:100%;
+                        font-size: .65rem;
+                    }
+                 }
+
                  button {
                      height: 40px;
                      padding: 0 30px;
@@ -282,7 +313,13 @@
                          background: $m-01;
                          color: white;
                      }
+
+                     @include sm {
+                        width: 20%;
+                    }
                  }
+
+
              }
          }
  
@@ -303,7 +340,8 @@
              animation-delay: 1.2s;
  
              @include sm {
-                 font-size: 100px;
+                 font-size: 30px;
+                 line-height: 30px;
              }
  
              @keyframes anime404 {
