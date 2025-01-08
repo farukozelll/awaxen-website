@@ -76,7 +76,7 @@ const POPULAR_WORKSHOPS = [
   {
     id: 1,
     title: 'Canlı: Solar Panel Kurulum Workshop',
-    date: '15 Ocak 2024',
+    date: '13 Ocak 2025',
     time: '14:00',
     instructor: 'Ahmet Yılmaz',
     participants: 45,
@@ -85,7 +85,7 @@ const POPULAR_WORKSHOPS = [
   {
     id: 2,
     title: 'Canlı: AI Model Eğitimi Workshop',
-    date: '20 Ocak 2024',
+    date: '11 Ocak 2025',
     time: '15:30',
     instructor: 'Ayşe Kaya',
     participants: 32,
@@ -122,7 +122,7 @@ const STYLES = {
     button: (active: boolean) => cn(
       'px-6 py-2 rounded-lg text-sm font-medium',
       'transition-all duration-200',
-      active 
+      active
         ? 'bg-blue-500 text-white'
         : 'bg-white/10 text-white/70 hover:bg-white/20'
     )
@@ -304,7 +304,33 @@ export default function TutorialsPage() {
         <section>
           <h2 className={STYLES.sections.title}>Canlı Workshop'lar</h2>
           <div className={STYLES.workshops.grid}>
-            {POPULAR_WORKSHOPS.map((workshop, index) => (
+            {POPULAR_WORKSHOPS.filter((workshop) => {
+              const parseDate = (dateString: string) => {
+                const months: { [key: string]: number } = {
+                  Ocak: 0,
+                  Şubat: 1,
+                  Mart: 2,
+                  Nisan: 3,
+                  Mayıs: 4,
+                  Haziran: 5,
+                  Temmuz: 6,
+                  Ağustos: 7,
+                  Eylül: 8,
+                  Ekim: 9,
+                  Kasım: 10,
+                  Aralık: 11,
+                };
+                const [day, month, year] = dateString.split(" ");
+                return new Date(parseInt(year), months[month], parseInt(day));
+              };
+
+              const workshopDate = parseDate(workshop.date);
+              const currentDate = new Date();
+              const oneWeekLater = new Date();
+              oneWeekLater.setDate(currentDate.getDate() + 7);
+
+              return workshopDate >= currentDate && workshopDate <= oneWeekLater;
+            }).map((workshop, index) => (
               <motion.div
                 key={workshop.id}
                 className={STYLES.workshops.card}
@@ -344,6 +370,7 @@ export default function TutorialsPage() {
             ))}
           </div>
         </section>
+
       </div>
     </main>
   );
