@@ -9,6 +9,7 @@ import Footer from "@/components/ui/footer";
 import solar from '@/public/images/solar.png';
 import agribot from '@/public/images/agribot.jpg';
 import aiAnalysis from '@/public/images/ai-analysis.webp';
+import Spotlight from '@/components/spotlight';
 
 const PRODUCTS = [
   {
@@ -142,14 +143,14 @@ export default function ProductsPage() {
       <section className={STYLES.header.wrapper}>
         <div className={STYLES.header.background} />
         <div className={STYLES.header.content}>
-          <motion.h1 
+          <motion.h1
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             Çözümlerimiz
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-xl text-white/80"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -186,7 +187,9 @@ export default function ProductsPage() {
                 <h3 className={STYLES.productCard.title}>{product.title}</h3>
                 <p className={STYLES.productCard.description}>{product.shortDesc}</p>
                 <button className={STYLES.productCard.button}>
-                  Detayları Gör
+                  <Link href={`/${product.id}`}>
+                    Detayları Gör
+                  </Link>
                 </button>
               </div>
             </motion.div>
@@ -194,7 +197,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Selected Product Details */}
-        <motion.div 
+        <motion.div
           className={STYLES.productDetails.wrapper}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
