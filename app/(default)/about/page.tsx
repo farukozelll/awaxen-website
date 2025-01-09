@@ -206,6 +206,7 @@ export default function AboutPage() {
           </motion.div>
         </section>
 
+
         {/* Journey Section */}
         <section className="my-24">
           <h2 className="text-2xl font-bold text-white text-center mb-12">Yolculuğumuz</h2>
