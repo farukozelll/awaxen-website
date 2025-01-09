@@ -106,6 +106,11 @@
      align-items: center;
      height: 100vh;
      overflow-x: hidden;
+
+     @include sm(){
+        margin-top: -250px;
+        margin-bottom: -200px;
+     }
  
      .container {
          margin: 0 auto;
