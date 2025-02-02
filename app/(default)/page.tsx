@@ -11,6 +11,7 @@ import Workflows from "@/components/workflows";
 import Features from "@/components/features";
 import Cta from "@/components/cta";
 import { cn } from '@/utils/utils';
+import Box from '@/components/Box';
 
 const STYLES = {
   main: cn(

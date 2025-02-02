@@ -8,6 +8,8 @@ import { cn } from '@/utils/utils';
 import AnimatedWLiquidWave from '@/components/AnimatedWLiquidWave';
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
+import Box from '@/components/Box';
+
 const STYLES = {
   main: cn(
     'relative flex grow flex-col',
@@ -73,18 +75,14 @@ export default function DefaultLayout({
                 opacity: [1, 0.9, 1]
               }}
               transition={{
-                duration: 2,
+                duration: 3,
                 repeat: Infinity,
                 ease: 'easeInOut'
               }}
             >
-              <AnimatedWLiquidWave
-                // leafColor="#4ADE80"
-                // circuitColor="#60A5FA"
-               //  baseColor="#0A0F1E"
-               //  width={280}
-               //  height={280}
-              />
+              <div className="flex justify-center items-center min-h-screen bg-[#0A0F1E]">
+                <Box />
+              </div>
             </motion.div>
           </motion.div>
         )}

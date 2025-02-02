@@ -32,6 +32,7 @@ module.exports = {
       },
       animation: {
         shine: "shine 5s ease-in-out 500ms infinite",
+        "spin-move": "spin-move 3s linear infinite",
       },
       keyframes: {
         shine: {
@@ -42,6 +43,10 @@ module.exports = {
         },
         gradient: {
           to: { "background-position": "200% center" },
+        },
+        "spin-move": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-150%)" },
         },
       },
     },
